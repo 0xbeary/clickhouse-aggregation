@@ -1,0 +1,21 @@
+services:
+  clickhouse:
+    image: bitnami/clickhouse:latest
+    container_name: squid_clickhouse_analytics
+    restart: always
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - "8123:8123"    # HTTP interface
+      - "9000:9000"    # Native interface
+    volumes:
+      - clickhouse-data:/bitnami/clickhouse
+    networks:
+      - squid-network
+
+volumes:
+  clickhouse-data:
+
+networks:
+  squid-network:
+    external: true
