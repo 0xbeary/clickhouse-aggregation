@@ -22,14 +22,19 @@ npm ci
 # 3. Start PostgreSQL and ClickHouse containers
 docker-compose up -d
 
-# 4. Configure PostgreSQL for logical replication and ClickHouse for real-time sync
+
+# 4. Generate TypeORM migrations
+npx squid-graphql-server
+
+
+# 5. Configure PostgreSQL for logical replication and ClickHouse for real-time sync
 chmod +x scripts/configure-replication.sh
 ./scripts/configure-replication.sh
 
-# 5. Build and start the processor
+# 6. Build and start the processor
 sqd process
 
-# 6. The command above will block the terminal
+# 7. The command above will block the terminal
 #    being busy with fetching the chain data, 
 #    transforming and storing it in the target database.
 #
